@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-title %}
+    Find Doctors
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block page-body %}
+    <h1 class="text-center">
+        <i class="fas fa-quote-left"></i>
+        Doctors
+        <i class="fas fa-quote-right"></i>
+        <hr class="mx-auto">
+    </h1>
+
+    <div class="container mb-5">
+        <div class="row">
+            {% for doctor in dlist %}
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card shadow p-2 mb-2">
+                    <div id="img_f">
+                        {% if doctor.image %}
+                            <img class="card-img avatar" src="{{ doctor.image.url }}" width="50" height="150">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title text-center"><a href="/doctor/{{ doctor.slug }}/">Dr. {{ doctor.name }}</a></h3>
+                        <p class="text-center">{{ doctor.qualification }}</p>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="container">
+        <div class="row justify-content-center">
+            {% if dlist.has_other_pages %}
+                <ul class="pagination">
+                    {% if dlist.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ dlist.previous_page_number }}">
+                                Previous </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link"> Previous </span>
+                        </li>
+                    {% endif %}
+
+                    {% for i in dlist.paginator.page_range %}
+                        {% if dlist.number == i %}
+                            <li class="page-item active">
+                                <span class="page-link"> {{ i }} <span class="sr-only">(current)</span></span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ i }}"> {{ i }} </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if dlist.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ dlist.next_page_number }}"> Next </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link"> Next </span>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Pagination -->
+{% endblock %}
+
+{% block page-footer %}
+    {% include 'footer.html' %}
+{% endblock %}

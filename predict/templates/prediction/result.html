@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block page-title %}
+    {{ request.user.username }} | Result
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+
+{% block page-body %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="list-group list-group-flush">
+                    <div class="card">
+                        <h2 class="card-header">Welcome {{ request.user }}!!!</h2>
+                        <div class="card-body">
+                            <div class="dropdown dropright">
+                                <a href="#" class="list-group-item  dropdown-toggle" data-toggle="dropdown">My
+                                    Account</a>
+                                <div class="dropdown-menu">
+                                    <div class="list-group list-group-flush">
+                                        <a class="list-group-item" href="{% url 'changepassword' %}">Change Password</a>
+                                        <a class="list-group-item" href="{% url 'logout' %}">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'history' %}" class="list-group-item">My History</a>
+                            <a href="{% url 'predict' %}" class="list-group-item">Predict Heart Disease</a>
+                            <a href="#" class="list-group-item">Learn about attributes used in prediction</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-8">
+                {% if fin == "false" %}
+                    <div class="alert alert-success">
+                        Congratulations!! You are at low risk of getting a heart disease. Stay Healthy!!!
+                    </div>
+
+                {% elif fin == "true" %}
+                    <div class="alert alert-danger">
+                        We are sorry to announce that you might likely be at risk of getting a heart disease.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

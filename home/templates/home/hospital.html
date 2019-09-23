@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-title %}
+    Find Hospitals
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block page-body %}
+    <h1 class="text-center">
+        <i class="fas fa-quote-left"></i>
+        Hospitals
+        <i class="fas fa-quote-right"></i>
+        <hr class="mx-auto">
+    </h1>
+
+    <div class="container">
+        <div class="row mb-3">
+            {% for hospital in hlist %}
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card shadow flex-md-row mb-4 box-shadow h-md-250">
+                        {% if hospital.image %}
+                            <img src="{{ hospital.image.url }}" alt="photo" class="card-img-right flex-auto d-md-block">
+                        {% endif %}
+                        <div class="card-body d-flex flex-column align-items-start">
+                            <h3 class="card-title"><a href="/hospital/{{ hospital.slug }}/">{{ hospital.name }}</a></h3>
+                            <p class="card-text"><i class="fas fa-map-marker-alt"></i>&nbsp;{{ hospital.location }}</p>
+                            <span><i class="fas fa-phone"></i>&nbsp;{{ hospital.phone_number }};</span>
+                            {% if hospital.phone_number2 %}
+                                <span><i class="fas fa-phone"></i>&nbsp;{{ hospital.phone_number2 }};</span>
+                            {% endif %}
+                            {% if hospital.phone_number3 %}
+                                <span><i class="fas fa-phone"></i>&nbsp;{{ hospital.phone_number3 }};</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="container">
+        <div class="row justify-content-center">
+            {% if hlist.has_other_pages %}
+                <ul class="pagination">
+                    {% if hlist.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ hlist.previous_page_number }}">
+                                Previous </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link"> Previous </span>
+                        </li>
+                    {% endif %}
+
+                    {% for i in hlist.paginator.page_range %}
+                        {% if hlist.number == i %}
+                            <li class="page-item active">
+                                <span class="page-link"> {{ i }} <span class="sr-only">(current)</span></span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ i }}"> {{ i }} </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if hlist.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ hlist.next_page_number }}"> Next </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link"> Next </span>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Pagination -->
+
+
+{% endblock %}
+
+{% block page-footer %}
+    {% include 'footer.html' %}
+{% endblock %}

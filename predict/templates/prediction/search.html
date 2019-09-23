@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-title %}
+    Search
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block page-body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+{#                if no results found#}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+
+                {% else %}
+{#                list the results#}
+                <div class="container">
+                    <div class="row mb-3">
+                        <h3>There are {{ search_count }} result(s) for "{{ search_word }}" :
+                        <hr class="mx-auto">
+                        </h3>
+                        {% for item in search_result_list %}
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                                    {% if item.image %}
+                                        <img src="{{ item.image.url }}" alt="photo" height="200px" width="250px" class="card-img-right flex-auto d-md-block">
+                                    {% endif %}
+                                {% if item.phone_number %}
+                                    <div class="card-body d-flex flex-column align-items-start">
+                                        <h3 class="card-title"><a href="{% url 'hospital_detail' item.slug %}">{{ item.name }}</a></h3>
+                                    </div>
+                                {% else %}
+                                    <div class="card-body d-flex flex-column align-items-start">
+                                        <h3 class="card-title"><a href="{% url 'doctor_detail' item.slug %}">{{ item.name }}</a></h3>
+                                    </div>
+                                {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

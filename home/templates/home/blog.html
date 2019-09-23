@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-title %}
+    Blogs
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block page-body %}
+    <h1 class="text-center">
+        <i class="fas fa-quote-left"></i>
+        Blogs
+        <i class="fas fa-quote-right"></i>
+        <hr class="mx-auto">
+    </h1>
+    <div class="container">
+        <div class="row mt-3">
+            {% for article in article_list_filter %}
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ article.image.url }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="/blogs/{{ article.slug }}/">{{ article.title }}</a>
+                                <br>
+                                <small><i class="fas fa-calendar-alt"></i> {{ article.date }}</small>
+                            </h5>
+                            <a href="/blogs/{{ article.slug }}" class="btn btn-primary">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="container">
+        <div class="row justify-content-center">
+            {% if article_list_filter.has_other_pages %}
+                <ul class="pagination">
+                    {% if article_list_filter.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ article_list_filter.previous_page_number }}">
+                                Previous </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link"> Previous </span>
+                        </li>
+                    {% endif %}
+
+                    {% for i in article_list_filter.paginator.page_range %}
+                        {% if article_list_filter.number == i %}
+                            <li class="page-item active">
+                                <span class="page-link"> {{ i }} <span class="sr-only">(current)</span></span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ i }}"> {{ i }} </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if article_list_filter.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ article_list_filter.next_page_number }}"> Next </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link"> Next </span>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Pagination -->
+{% endblock %}
+
+{% block page-footer %}
+    {% include 'footer.html' %}
+{% endblock %}

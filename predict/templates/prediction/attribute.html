@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block page-title %}
+    {{ request.user.username }} | Learn about Attribues
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block page-body %}
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-12 col-md-4">
+                <div class="list-group list-group-flush">
+                    <div class="card">
+                        <h2 class="card-header">Welcome {{ request.user }}!!!</h2>
+                        <div class="card-body">
+                            <div class="dropdown dropright">
+                                <a href="#" class="list-group-item  dropdown-toggle" data-toggle="dropdown">My
+                                    Account</a>
+                                <div class="dropdown-menu">
+                                    <div class="list-group list-group-flush">
+                                        <a class="list-group-item" href="{% url 'changepassword' %}">Change Password</a>
+                                        <a class="list-group-item" href="{% url 'logout' %}">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'history' %}" class="list-group-item">My History</a>
+                            <a href="{% url 'predict' %}" class="list-group-item">Predict Heart Disease</a>
+                            <a href="{% url 'attribute' %}" class="list-group-item">Learn about attributes used in
+                                prediction</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8">
+                <ul>
+                    {% for attribute in attribute_list %}
+                        <li><a href="/myaccount/attribute/{{ attribute.slug }}" class="attr">{{ attribute.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

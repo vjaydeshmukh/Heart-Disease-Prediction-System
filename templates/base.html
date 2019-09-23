@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block page-title %} {% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script type="text/javascript" src="{% static 'vendor/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendor/jquery-migrate.min.js' %}"></script>
+    {% block page-css-js %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'vendor/fontawesome/css/all.min.css' %}">
+</head>
+<body class="d-flex flex-column h-100">
+    {% block page-header %} {% endblock %}
+    {% block page-body %} {% endblock %}
+    {% block page-footer %} {% endblock %}
+    <script type="text/javascript" src="{% static 'vendor/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendor/bootstrap.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand offset-md-1" href="{% url 'home' %}">
+            <img src="{% static 'image/logos4.png' %}" height="60px" width="60px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'hospital' %}"><i class="fas fa-hospital"></i> Find Hospitals</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'doctor' %}"><i class="fas fa-stethoscope"></i> Find Doctors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog' %}"><i class="fas fa-newspaper"></i> Blogs</a>
+                </li>
+                {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i> Signup</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashboard' %}"><i class="fas fa-user"></i> {{ request.user }}</a>
+                    </li>
+                {% endif %}
+                <li>
+                    <form class="form-group input" action="/search/" method="post">
+                        {% csrf_token %}
+                        <input class="form-control" name="q" type="search" placeholder="Search Hospitals or Doctors">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

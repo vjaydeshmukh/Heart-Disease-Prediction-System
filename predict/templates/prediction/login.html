@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block page-title %}
+    Log In
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block page-body %}
+    <div class="container mt-3 mb-3">
+        <div class="row justify-content-around">
+            <div class = "col-sm-12 col-md-8 col-lg-6">
+                <div class="card">
+                    <h2 class="card-header text-center">Log In</h2>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                <div class="alert alert-danger">
+                                    <a class="close" href="#" data-dismiss="alert">×</a>
+                                        {{ message }}
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            {% for hidden_field in form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+                            {% for field in form.visible_fields %}
+                                <div class="form-group">
+                                    {{ field.label_tag }}
+                                    {% render_field field class="form-control" placeholder=field.label %}
+                                </div>
+                            {% endfor %}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Log In</button>
+                                <span>&nbsp;Don't have an account?</span>&nbsp;<a href="{% url 'signup' %}" class="signup">Sign up here.</a>
+                                <br>
+                                <a href="{% url 'password_reset' %}" class="signup">Forgot Password?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

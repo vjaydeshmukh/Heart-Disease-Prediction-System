@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block page-title %}
+    {{ request.user.username }} | History
+{% endblock %}
+
+{% block page-css-js %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/magnific-popup.css' %}">
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block page-body %}
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-12 col-md-4">
+                <div class="list-group list-group-flush">
+                    <div class="card">
+                        <h2 class="card-header">Welcome {{ request.user }}!!!</h2>
+                        <div class="card-body">
+                            <div class="dropdown dropright">
+                                <a href="#" class="list-group-item  dropdown-toggle" data-toggle="dropdown">My
+                                    Account</a>
+                                <div class="dropdown-menu">
+                                    <div class="list-group list-group-flush">
+                                        <a class="list-group-item" href="{% url 'changepassword' %}">Change Password</a>
+                                        <a class="list-group-item" href="{% url 'logout' %}">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'history' %}" class="list-group-item">My History</a>
+                            <a href="{% url 'predict' %}" class="list-group-item">Predict Heart Disease</a>
+                            <a href="{% url 'attribute' %}" class="list-group-item">Learn about attributes used in
+                                prediction</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8 gallery">
+                <a href="{% static 'graph/chol.png' %}" class="col-md-4">
+                    <img class="img-thumbnail" src="{% static 'graph/chol.png' %}">
+                </a>
+                <a href="{% static 'graph/press.png' %}" class="col-md-4">
+                    <img class="img-thumbnail" src="{% static 'graph/press.png' %}">
+                </a>
+                <a href="{% static 'graph/h_rate.png' %}" class="col-md-4">
+                    <img class="img-thumbnail" src="{% static 'graph/h_rate.png' %}">
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page-footer %}
+    <script type="text/javascript" src="{% static 'vendor/jquery.magnific-popup.min.js' %}"></script>
+    <script type="text/javascript" src= "{% static 'js/gallery.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-title %}
+    {{ detail.title }}
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block page-body %}
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-justify">
+                <img src="{{ detail.image.url }}" class="img-fluid mb-4" alt="Responsive image">
+                <h1>{{ detail.title }}</h1>
+                <small>&nbsp;<i class="fas fa-calendar-alt"></i> {{ detail.date }}</small>
+                <hr class="mx-auto">
+                <p>{{ detail.detail|linebreaks }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page-footer %}
+    {% include 'footer.html' %}
+{% endblock %}

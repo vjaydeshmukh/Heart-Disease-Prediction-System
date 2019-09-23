@@ -1,0 +1,172 @@
+/*red: #A91623;*/
+
+/* Navigation bar */
+.navbar-dark .navbar-nav .nav-link {
+	font-size: 18px;
+	color: #fff;
+	border-bottom: 3px solid transparent;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+	font-size: 18px;
+	color: #fff;
+	border-bottom: 3px solid;
+}
+
+.nav-link {
+	padding-left: 0.9em;
+	padding-right: 0.9em;
+}
+
+.nav-item {
+	margin: 5px;
+}
+
+.bg-dark {
+	background-color: #0c608c!important;
+}
+
+
+/* Carousel text and button */
+.h2.home {
+	color: #a91623;
+}
+
+.btn.btn-primary.home {
+	background-color: yellow;
+	color: black;
+}
+
+/* Footer */
+.unique-color-dark {
+	background-color: #0c608c;
+    color: #fff;
+}
+
+/* Search input box */
+form.form-group.input {
+	width: 225px;
+}
+
+/* Buttons of form */
+a.btn.btn-primary, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    background-color: #0c608c;
+    border-color: #0c608c;
+}
+
+button.btn.btn-primary {
+	background-color: #0c608c;
+    border-color: #0c608c;
+	font-size: 18px;
+	color: #fff;
+}
+
+a.btn.btn-primary {
+	background-color: #0c608c;
+    border-color: #0c608c;
+	font-size: 18px;
+	color: #fff;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+	box-shadow: none;
+}
+
+
+/* Home page css */
+#dot li {
+  	width: 10px ;
+  	height: 10px ;
+  	border-radius: 100%;
+}
+
+.bg {
+	background-color: #ffffff;
+}
+
+.card-img.avatar {
+	vertical-align: middle;
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+}
+
+.shadow {
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,.10)!important;
+}
+
+#bg_c:hover {
+	transform: scale(1.02);
+	transition: transform .3s;
+}
+
+.img_c {
+	height: 80px;
+	width: 80px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#bg_c {
+    background-color: #ffdcd6;
+}
+
+i.fas.fa-hand-point-up.fa-7x {
+    color: #00b0f0;
+}
+
+div#img_f {
+    text-align: center;
+}
+
+
+/* Pagination css */
+.page-item.active .page-link {
+	background-color: #0c608c;
+    border-color: #4478ad;
+}
+
+/*.primary-color {*/
+	/*background-color: #0c608c;*/
+/*}*/
+
+.fas.fa-quote-left, .fas.fa-quote-right {
+	font-size: 30px;
+}
+
+/*.no-padding {*/
+	/*padding-right: 2px;*/
+	/*padding-left: 2px;*/
+	/*margin-bottom: 0;*/
+/*}*/
+
+/*label.btn {*/
+	/*background-color: #0c608c;*/
+	/*color: white;*/
+	/*font-size: 18px;*/
+/*}*/
+
+h1 {
+	color: #0c608c;
+}
+
+.form-group {
+    margin: 1em;
+}
+
+.form-control {
+    width: 100%;
+}
+
+a.signup {
+    font-weight: 600;
+}
+
+a.attr {
+	font-size: 20px;
+}
+
+.dropdown-menu {
+	min-width: 15rem;
+}

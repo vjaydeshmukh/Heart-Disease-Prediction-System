@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-title %}
+    {{ doctor_detail.name }}
+{% endblock %}
+
+{% block page-header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+{% block page-body %}
+    <div class="container mt-3">
+        <div class="row">
+            <!-- Image -->
+            {% if doctor_detail.image %}
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-2">
+                    <img class="img-fluid" src="{{ doctor_detail.image.url }}" height="250px" width="200px"/>
+                </div>
+            {% endif %}
+
+            <div class="col-12 col-md-8">
+                <h3>{{ doctor_detail.name }}</h3>
+                <h5>Qualifications: </h5>{{ doctor_detail.qualification }}
+                <h5>Works in: </h5> {{ doctor_detail.hospital }}
+                {% if doctor_detail.schedule %}
+                    <h5>Schedule: </h5>{{ doctor_detail.schedule }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <!-- Description -->
+            <div class="col-12">
+                <div class="card-header"><h4><i class="fas fa-list"></i>&nbsp;Details</h4></div>
+                <div class="card-body text-justify">
+                    <p>  {{ doctor_detail.details|linebreaks }} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page-footer %}
+    {% include 'footer.html' %}
+{% endblock %}
