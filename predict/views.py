@@ -94,7 +94,6 @@ def index(request):
     return render(request, "prediction/predict.html", {'form': form })
 
 
-
 def heart_predict(request):
     val = predict.predict(fin)
     return render(request, "prediction/result.html", {'fin': val})
@@ -130,17 +129,12 @@ def register_view(request):
         userObj = form.cleaned_data
         username = userObj['username']
         email_address = userObj['email_address']
-        password = userObj['password']
-        confirm_password = userObj['confirm_password']
         date_of_birth = userObj['date_of_birth']
         gender = userObj['gender']
 
         if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email_address).exists()):
             #saving the data of new user in database
-            new_user = Register.objects.create(username= username, email_address= email_address,
-                                               password=password, confirm_password=confirm_password,
-                                               date_of_birth=date_of_birth, gender=gender)
-
+            new_user = Register.objects.create(username= username, email_address= email_address, date_of_birth=date_of_birth, gender=gender)
             new_user.save()
 
             # email confirmation
@@ -161,13 +155,13 @@ def register_view(request):
             return HttpResponse('Please confirm your email address to complete the registration')
         else:
             if User.objects.filter(username=username).exists():
-                messages.error(request, 'username already exists')
+                messages.error(request, 'Given username already exists')
             elif User.objects.filter(email=email_address).exists():
-                messages.error(request, 'email already exists')
+                messages.error(request, 'Given email already exists')
             form = UserRegisterForm()
 
     elif form.errors:
-        messages.error(request, 'username already exists')
+        messages.error(request, 'Please enter valid data in the form.')
         form = UserRegisterForm()
 
     context = {'form': form }
@@ -191,25 +185,14 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 
-#view for changing current password
+# view for changing current password
 @login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
-            # retrieving username and new passwords to update it in model
-            username_user = str(User.objects.filter(username=request.user).get())
-            username_register = str(Register.objects.filter(username=username_user).get())
-            userObj = form.cleaned_data
-            password = userObj['new_password1']
-            confirm_password = userObj['new_password2']
-
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-
-            #updating the passwords in models
-            if (username_user == username_register):
-                Register.objects.update(password=password, confirm_password=confirm_password)
 
             messages.success(request, 'Your password was successfully updated!')
             return redirect('dashboard')
